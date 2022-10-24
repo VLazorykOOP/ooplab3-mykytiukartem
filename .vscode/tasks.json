@@ -10,7 +10,7 @@
 				"-g",
 				"${workspaceFolder}/*.cpp",
 				"-o",
-				"${workspaceFolder}\\$lab3oop.exe"
+				"${workspaceFolder}\\lab3oop.exe"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
