@@ -4,14 +4,18 @@
 //
 
 #include <iostream>
+
 // Ваші файли загловки 
 //
-
+#include "Lab3Expaple.h"
 int main()
 {
     std::cout << " Lab #3  !\n";
 //  Код виконання завдань
 //  Функції та класи можуть знаходитись в інших файлах проекту
+    mainExample1();
+    mainExample3();
+    mainExample4();
 
 }
 
