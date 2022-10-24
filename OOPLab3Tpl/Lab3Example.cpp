@@ -255,14 +255,14 @@ int mainExample3()
 	ObjCDef = ObjCDef.Sub(ObjP2);
 	cout << " \n Кiлькiсть створених об'єктiв Vec2 пiсля Sub " << Vec2::getCount() << endl;
 #else 
-	cout << Testing input \n";
+	cout << "Testing input \n";
 	ObjCDef.Input();
 	cout << "Testing gunction \n";
 	ObjCDef = ObjCDef.Add(ObjP2);
 	ObjCDef.Output();
 	cout << " \n Counts create objects Vec2 before  Sub " << Vec2::getCount() << endl;
 	ObjCDef = ObjCDef.Sub(ObjP2);
-	cout << " \n  Counts create objects Vec2 after Sub "Sub " << Vec2::getCount() << endl;
+	cout << " \n  Counts create objects Vec2 after Sub  " << Vec2::getCount() << endl;
 #endif
 
 	ObjCDef.Output();
@@ -384,7 +384,16 @@ void ComplexVector::Input() {
 		v = new ComplexDouble[num];
 	}
 	for (int i = 0; i < num; i++) {
-		cout << " v [ " << i << " ] real img  "; cin >> v[i] >> v[i]._Val[_IM];
+
+#if defined(_MSC_VER)
+cout << " v [ " << i << " ] real img  "; cin >> v[i] >> v[i]._Val[_IM];
+#else 
+double re,im;
+cout << " v [ " << i << " ] real img  "; cin >> re>>im;
+v[i].real(re); 
+v[i].imag(im);
+#endif		
+		
 		
 	}
 }
@@ -414,8 +423,14 @@ int mainExample4()
 {
 	ComplexDouble a(1.0, 2), b, c;
 	cout << a << endl;
-	b._Val[_RE] = 21.3;
+#if defined(_MSC_VER)
+    b._Val[_RE] = 21.3;
 	b._Val[_IM] = 22.3;
+#else 
+    b.real( 21.3);
+	b.imag (22.3);
+#endif	
+	
 	cout << b << endl;
 	c = a + b;
 	cout << c << endl;
@@ -426,7 +441,15 @@ int mainExample4()
 	cout << "VecObj1 \n";
 	VecObj1.Output();
 	cout << " Input a " << endl;
-	cin >> a >> a._Val[_IM];
+
+#if defined(_MSC_VER)
+ cin >> a >> a._Val[_IM];
+#else 
+double re,im;
+cin >> re>>im;
+a.real(re); 
+a.imag(im);
+#endif		
 	cout << a << endl;
 	ComplexVector VecObj2(10, a);
 	VecObj2.Output();
