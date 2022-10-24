@@ -87,7 +87,7 @@ int mainExample1()
 	obj.setColor(10001);
 	obj.printInfo();
 	cout << " End testing \n";
-	return 0;
+	return 1;
 }
 
 
@@ -460,7 +460,7 @@ a.imag(im);
 	VecObj1 = VecObj.Add(VecObj2);
 	VecObj1.Output();
 
-	return 0;
+	return 1;
 }
 
 /// 
