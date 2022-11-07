@@ -162,7 +162,7 @@ Vec2::Vec2(double ix, double iy) {
 	count++;
 }
 Vec2::Vec2(const Vec2& s) {
-	if (this == &s) return;
+	//if (this == &s) return; //  // the expression is used in the old standard
 	x = s.x; y = s.y; state = OK;
 	count++;
 };
@@ -351,7 +351,7 @@ ComplexVector::ComplexVector(int n, ComplexDouble* p) : ComplexVector(n) {
 }
 
 ComplexVector::ComplexVector(const ComplexVector& s) {
-	if (this == &s) return;
+	// if (this == &s) return;  // the expression is used in the old standard
 	num = s.num;
 	v = new ComplexDouble[num];
 	state = 0;
