@@ -307,17 +307,17 @@ typedef complex<double> ComplexDouble;
 class ComplexVector
 {
 	ComplexDouble* v;
-	int num;
+	int num;   // default num=2
 	int state = 0;
 public:
-	ComplexVector() : v(NULL), num(0), state(0) {}
+	ComplexVector() : ComplexVector(2) {}
 	ComplexVector(int n);
 	ComplexVector(int n, ComplexDouble&);
 	ComplexVector(int n, ComplexDouble*);
 	ComplexVector(const ComplexVector& s);
 	ComplexVector& operator=(const ComplexVector& s);
 	~ComplexVector() {
-		cout << " del vec";
+		std::cout << " del vec";
 		if (v) delete[] v;
 	}
 	void Output();
@@ -327,35 +327,31 @@ public:
 };
 
 ComplexVector::ComplexVector(int n) {
-	if (n <= 0) { v = NULL;  num = 0;   state = -1; cout << " Vec --> 0  "; }
+	if (n <= 0)    n = 2;  // default num =2;
 	num = n;
 	v = new ComplexDouble[n];
 	for (int i = 0; i < n; i++) {
-		v[i] = 0.0;
-		//v[i]._Val[_RE]=0.0; v[i]._Val[_IM]=0.0;  
-	}
+			v[i] = 0.0;
+			//v[i]._Val[_RE]=0.0; v[i]._Val[_IM]=0.0;  
+		}
+
 }
-ComplexVector::ComplexVector(int n, ComplexDouble& b) {
-	if (n <= 0) { v = NULL;  num = 0;   state = -1; cout << " Vec --> 0  "; }
-	num = n;
-	v = new ComplexDouble[n];
-	for (int i = 0; i < n; i++) {
+ComplexVector::ComplexVector(int n, ComplexDouble& b) : ComplexVector(n) {
+	for (int i = 0; i < num; i++) {
 		v[i] = b;
 		//v[i]._Val[_RE]=0.0; v[i]._Val[_IM]=0.0;  
 	}
 }
 
-ComplexVector::ComplexVector(int n, ComplexDouble* p) {
-	if (n <= 0 || p == NULL) { v = NULL;  num = 0;   state = -1; cout << " Vec --> 0  "; }
-	num = n;
-	v = new ComplexDouble[n];
-	for (int i = 0; i < n; i++) {
+ComplexVector::ComplexVector(int n, ComplexDouble* p) : ComplexVector(n) {
+	if (p != nullptr) 
+	for (int i = 0; i < num; i++) 
 		v[i] = p[i];
-	}
+	
 }
 
 ComplexVector::ComplexVector(const ComplexVector& s) {
-
+	if (this == &s) return;
 	num = s.num;
 	v = new ComplexDouble[num];
 	state = 0;
@@ -375,12 +371,14 @@ ComplexVector& ComplexVector::operator=(const ComplexVector& s) {
 	return *this;
 }
 void ComplexVector::Input() {
-	if (num == 0) {
-		if (v) delete[] v;
+	int in_num=0;
 		do {
 			cout << "Input size Vec\n";
-			cin >> num;
-		} while (num <= 0);
+			cin >> in_num;
+		} while (in_num <= 0);
+		if (num != in_num ) {
+			num = in_num;
+			if (v) delete[] v;
 		v = new ComplexDouble[num];
 	}
 	for (int i = 0; i < num; i++) {
@@ -415,7 +413,7 @@ ComplexVector ComplexVector::Add(ComplexVector& b) {
 		for (int i = 0; i < tnum; i++) tmp.v[i] = v[i] + b.v[i];
 		return tmp;
 	}
-	return ComplexVector(0);
+	return ComplexVector(1);
 }
 
 
