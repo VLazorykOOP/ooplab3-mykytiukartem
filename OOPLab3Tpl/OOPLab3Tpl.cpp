@@ -7,7 +7,7 @@
 
 // Ваші файли загловки 
 //
-#include "Lab3Expaple.h"
+#include "Lab3Example.h"
 int main()
 {
     std::cout << " Lab #3  !\n";
